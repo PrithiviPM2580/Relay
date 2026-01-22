@@ -7,4 +7,5 @@ export const envValidator = z.object({
   PORT: z.coerce.number().default(5000),
   LOG_LEVEL: z.string().default("info"),
   MONGO_URI: z.string().min(1, "MONGO_URI is required"),
+  CORS_ORIGIN: z.string().default("http://localhost:5173"),
 });
