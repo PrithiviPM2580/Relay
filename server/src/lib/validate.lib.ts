@@ -1,5 +1,5 @@
 import { z } from "zod";
-import APIError from "./api-error.js";
+import APIError from "./api-error.lib.js";
 
 export function formatIssues(issues: z.ZodError["issues"]) {
   return issues.map((issue) => ({

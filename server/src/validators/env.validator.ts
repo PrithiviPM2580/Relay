@@ -13,4 +13,6 @@ export const envValidator = z.object({
   GOOGLE_CLIENT_ID: z.string().min(1, "GOOGLE_CLIENT_ID is required"),
   GOOGLE_CLIENT_SECRET: z.string().min(1, "GOOGLE_CLIENT_SECRET is required"),
   GOOGLE_REDIRECT_URI: z.string().min(1, "GOOGLE_REDIRECT_URI is required"),
+  APP_NAME: z.string().default("Relay"),
+  APP_VERSION: z.string().default("1.0.0"),
 });

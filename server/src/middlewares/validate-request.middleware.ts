@@ -1,8 +1,8 @@
 import type { NextFunction, Request, Response } from "express";
 import type { z } from "zod";
-import APIError from "@/lib/api-error.js";
-import logger from "@/lib/logger.js";
-import { formatIssues } from "@/lib/validate.js";
+import APIError from "@/lib/api-error.lib.js";
+import logger from "@/lib/logger.lib.js";
+import { formatIssues } from "@/lib/validate.lib.js";
 
 const validatePart = (
   part: "body" | "query" | "params",

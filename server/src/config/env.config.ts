@@ -1,4 +1,4 @@
-import validate from "@/lib/validate.js";
+import validate from "@/lib/validate.lib.js";
 import { envValidator } from "@/validators/env.validator.js";
 
 const envConfig = {

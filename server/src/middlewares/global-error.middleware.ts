@@ -1,5 +1,5 @@
 import type { NextFunction, Request, Response } from "express";
-import APIError from "@/lib/api-error.js";
+import APIError from "@/lib/api-error.lib.js";
 
 export default function globalErrorHandler(
   err: Error,
