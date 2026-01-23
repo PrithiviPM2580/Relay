@@ -10,6 +10,6 @@ initSockerServer(httpServer);
 
 const PORT = config.PORT || 3000;
 
-app.listen(PORT, () => {
+httpServer.listen(PORT, () => {
   logger.info(`Server is running in http://localhost:${PORT}`);
 });
