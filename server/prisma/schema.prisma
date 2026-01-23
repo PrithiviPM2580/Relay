@@ -16,9 +16,10 @@ model User {
   emailVerified Boolean   @default(false)
   image         String?
   createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  updatedAt     DateTime  @updatedAt  
   sessions      Session[]
   accounts      Account[]
+  codespaces    Codespace[]
 
   @@unique([email])
   @@map("user")
@@ -70,4 +71,19 @@ model Verification {
 
   @@index([identifier])
   @@map("verification")
+}
+
+model Codespace{
+  id          String   @id @map("_id")
+  name        String
+  content     String
+  language    String @default("plaintext")
+  ownerId     String
+  owner       User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  isPublic    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([ownerId])
+  @@map("codespace")
 }
