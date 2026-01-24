@@ -1,12 +1,66 @@
+import { Spinner } from "@/components/ui/spinner";
+import { authClient } from "@/lib/auth-client";
+import { useState } from "react";
+import { toast } from "sonner";
+
 export default function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  async function login() {
+    await authClient.signIn.email(
+      {
+        email,
+        password,
+      },
+      {
+        onRequest: () => {
+          setIsLoading(true);
+        },
+        onSuccess: () => {
+          toast.success("Logged in successfully!");
+          setIsLoading(false);
+        },
+        onError: () => {
+          toast.error("Failed to log in.");
+          setIsLoading(false);
+        },
+      },
+    );
+  }
+
+  if (isLoading) {
+    return <Spinner />;
+  }
   return (
     <div className="w-full h-screen flex-center ">
       <div className="form-container">
         <p className="title">Welcome back</p>
-        <form className="form">
-          <input type="email" className="input" placeholder="Email" />
-          <input type="password" className="input" placeholder="Password" />
-          <button className="form-btn bg-border mt-4">Log in</button>
+        <form
+          className="form"
+          onSubmit={(e) => {
+            e.preventDefault();
+            login();
+          }}
+        >
+          <input
+            type="email"
+            className="input"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            type="password"
+            className="input"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button className="form-btn bg-border mt-4" type="submit">
+            Log in
+          </button>
         </form>
         <div className="buttons-container">
           <div className="google-login-button">
