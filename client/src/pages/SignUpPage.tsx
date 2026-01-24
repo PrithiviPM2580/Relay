@@ -1,13 +1,78 @@
+import { useState } from "react";
+import { authClient } from "@/lib/auth-client";
+import { Spinner } from "@/components/ui/spinner";
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
+
 export default function SignUpPage() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+  async function signUp() {
+    await authClient.signUp.email(
+      {
+        email,
+        password,
+        name,
+      },
+      {
+        onRequest: () => {
+          setIsLoading(true);
+        },
+        onSuccess: () => {
+          navigate("/");
+          toast.success("Account created successfully!");
+          setIsLoading(false);
+        },
+        onError: () => {
+          toast.error("Failed to create account.");
+          setIsLoading(false);
+        },
+      },
+    );
+  }
+
+  if (isLoading) {
+    return <Spinner />;
+  }
+
   return (
     <div className="w-full h-screen flex-center ">
       <div className="form-container">
         <p className="title">Create account</p>
-        <form className="form">
-          <input type="text" className="input" placeholder="Name" />
-          <input type="email" className="input" placeholder="Email" />
-          <input type="password" className="input" placeholder="Password" />
-          <button className="form-btn bg-border">Create account</button>
+        <form
+          className="form"
+          onSubmit={(e) => {
+            e.preventDefault();
+            signUp();
+          }}
+        >
+          <input
+            type="text"
+            className="input"
+            placeholder="Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <input
+            type="email"
+            className="input"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            type="password"
+            className="input"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button className="form-btn bg-border" type="submit">
+            Sign Up
+          </button>
         </form>
         <div className="buttons-container">
           <div className="google-login-button">
