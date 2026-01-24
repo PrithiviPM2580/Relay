@@ -1,4 +1,4 @@
-const SignUp = () => {
+export default function SignUpPage() {
   return (
     <div className="w-full h-screen flex-center ">
       <div className="form-container">
@@ -55,6 +55,4 @@ const SignUp = () => {
       </div>
     </div>
   );
-};
-
-export default SignUp;
+}
