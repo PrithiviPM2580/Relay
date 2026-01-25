@@ -194,4 +194,7 @@
   .home-para {
     @apply text-base sm:text-lg md:text-xl lg:text-2xl text-center max-w-2xl text-white;
   }
+  .codeshare {
+    @apply w-full h-screen bg-background overflow-hidden;
+  }
 }
